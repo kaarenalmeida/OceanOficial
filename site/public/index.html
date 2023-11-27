@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean Alive</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+        <div class="logo">
+            <img src="logo.png">
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="pesquisa.html">Participe da Pesquisa</a></li>
+            </ul>
+        </nav>
+    </div>
+    
+    <div class="bemvindo">
+        <h1>🐚 Seja bem-vindo(a) a Ocean Alive! 🐚</h1>
+        <p>Cobrindo mais de 70% do nosso planeta, os oceanos afetam o clima, a diversidade de animais e também a vida de muitas pessoas, mas infelizmente, eles estão em perigo por causa da sujeira, da poluição e da pesca exagerada. <br> <br>
+            Precisamos proteger e cuidar dos oceanos e dos animais que o habitam para garantir um futuro saudável para o nosso planeta e para as próximas gerações. Reconhecer a importância dos oceanos e da vida marinha é o primeiro passo para fazer a diferença!
+        </p>
+    </div>
+
+    <div class="organiza">
+
+    <div class="noticias">
+    <h2>Notícias Recentes:</h2>
+    <ul>
+        <li><a href="https://www.bbc.com/portuguese/articles/c9wxl4x7pmlo" target="_blank">BBC: Aquecimento global: por que novo recorde de calor do oceano é alerta sombrio para planeta.</a></li> <br>
+        <li><a href="https://g1.globo.com/meio-ambiente/noticia/2023/07/27/circulacao-do-oceano-atlantico-norte-vai-entrar-em-colapso-ate-o-fim-do-seculo-por-causa-da-mudanca-climatica-projeta-estudo.ghtml" target="_blank">G1: Circulação do oceano Atlântico Norte vai entrar em colapso até o fim do século por causa da mudança climática, projeta estudo.</a></li> <br>
+        <li><a href="https://www1.folha.uol.com.br/ambiente/2023/08/quantidade-de-plastico-no-oceano-e-menor-do-que-se-pensava-mas-taxa-de-crescimento-preocupa-aponta-novo-estudo.shtml" target="_blank">FOLHA: Quantidade de plástico no oceano é menor do que se pensava, mas taxa de crescimento preocupa, aponta novo estudo.</a></li> <br>
+    </ul>
+</div>
+
+<div class="dicas">
+        <div class="quadrados">
+          <img src="conchas.png" width="200px" alt="">
+         <a href="https://www.potencialbiotico.com/post/conchasdomar" target="_blank"><div class="txt">Você sabe por que não devemos trazer conchas pra casa?</div></div></a>
+         <div class="quadrados">
+         <a href="https://www.iberdrola.com/sustentabilidade/como-reduzir-o-consumo-de-plastico" target="_blank"><img src="recicla.png" width="200px" alt=""><div class="txt">Confira algumas dicas para reduzir o consumo de plástico!</div></div></a>
+         <div class="quadrados">
+         <a href="https://www.jusbrasil.com.br/artigos/o-que-e-pesca-predatoria-e-por-que-ela-e-considerada-crime/1314186631" target="_blank"><img src="pesca.png" width="200px" alt=""><div class="txt">Entenda o que é pesca predatória e quais são seus impactos!</div></div></a>
+         <div class="quadrados">
+         <a href="https://envolverde.com.br/dicas-para-proteger-o-oceano-durante-as-suas-ferias-a-beira-mar/" target="_blank"><img src="ferias.png" width="200px" alt=""><div class="txt">Dicas para preservar o oceano durante suas férias!</div></div></a>
+</div>
+</div>
+<div class="avalie">
+    <h3>O que achou do nosso conteúdo? Deixe seu elogio ou sugestão!</h3> 
+    <input id="avaliacao" type="text" placeholder="Queremos te ouvir!"> <button onclick="enviar()">Enviar!</button>
+</div>
+
+<!-- <div class="pesquisa">
+    <h3><a href="https://forms.gle/1hFscUeHWevxwNzw6" target="_blank" style="color: #ffffff;">Participe da nossa pesquisa!</a></h3>    
+</div> -->
+
+<div class="footer">🧜🏻‍♀️ Criado com amor por Karen Almeida - 2023 🧜🏻‍♀️</div>
+    </div>
+</body>
+</html>
+<script>
+
+
+  var comentario = avaliacao.value;
+
+// Enviando o valor da nova input
+fetch("/index/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          // cardErro.style.display = "block";
+
+          alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          // finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+      });
+
+    return false;
+  
+
+  function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  // function sumirMensagem() {
+  //   cardErro.style.display = "none";
+  // }
+
+</script>
